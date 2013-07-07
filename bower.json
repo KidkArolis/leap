@@ -1,0 +1,19 @@
+{
+  "name": "leap",
+  "version": "0.3.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.5.0",
+    "jquery": "~2.0.3",
+    "backbone.stickit": "~0.6.3",
+    "backbone": "~1.0.0",
+    "cherrytree": "https://github.com/KidkArolis/cherrytree.git"
+  }
+}
