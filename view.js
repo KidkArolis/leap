@@ -90,6 +90,8 @@ define(function (require) {
   var $              = require("jquery");
   var Backbone       = require("backbone");
   var Navstackable   = require("backbone-navstackable");
+  var assert         = require("./assert");
+  var mediator       = require("./mediator");
   var addEventBinder = require("./add_event_binder");
 
   // var upcase = function (str) {
@@ -185,8 +187,16 @@ define(function (require) {
       return {
         model: this.model,
         collection: this.collection,
-        cid: this.cid
+        cid: this.cid,
+        linkTo: _.bind(this.linkTo, this)
       };
+    },
+
+    // a way to generate links, delegates to router.generate
+    linkTo: function () {
+      assert("The application needs a router for generating links attached to the mediator",
+        mediator.router);
+      return mediator.router.generate.apply(mediator.router, arguments);
     },
 
     getTemplateData: function () {},
