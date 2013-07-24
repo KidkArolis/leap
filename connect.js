@@ -9,8 +9,16 @@ define(function (require) {
   return function (options) {
 
     options = _.defaults(options || {}, {
+      // transform value after getting from the model
       onGet: _.identity,
-      onSet: _.identity
+      // transform value before setting on the model
+      onSet: _.identity,
+      // model to observe
+      model: null,
+      // attribute to observe
+      observe: null,
+      // view to connect to
+      view: null
     });
 
     var updateView = function () {
