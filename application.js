@@ -43,7 +43,7 @@ define(function (require) {
         var href = $(this).attr("href");
         if (href.length > 0 && href[0] !== "#") {
           var protocol = this.protocol + "//";
-          if (href.slice(protocol.length) !== protocol) {
+          if (href && href.slice(protocol.length) !== protocol) {
             evt.preventDefault();
             // handle the URL manually
             router.handleURL(href).then(function () {
