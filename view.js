@@ -74,7 +74,7 @@ define(function (require) {
   // require these Backbone Plugins to ensure correct order. If things get
   // loaded out of order, the plugins augment Backbone only after LeapView
   // extends Backbone.View
-  require("backbone-stickit");
+  require("backbone.stickit");
 
 
   var _              = require("underscore");
