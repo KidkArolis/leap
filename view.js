@@ -67,15 +67,6 @@ define(function (require) {
     ```
 
 
-  * COMING SOON: default predefined render method that combines template() +
-    stickit() + bindUIElements() + triggers afterRender()
-
-
-
-  * Leap View also mixes in backbone-navstackable functions to turn all backbone
-    views into Navstack compatible pages. You can disable this mixin by setting
-    `navstackable: false` property in your view.
-
   */
 
 
@@ -89,7 +80,6 @@ define(function (require) {
   var _              = require("underscore");
   var $              = require("jquery");
   var Backbone       = require("backbone");
-  var Navstackable   = require("backbone-navstackable");
   var assert         = require("./assert");
   var mediator       = require("./mediator");
   var addEventBinder = require("./add_event_binder");
@@ -106,14 +96,9 @@ define(function (require) {
 
   return Backbone.View.extend({
 
-    navstackable: true,
-
     constructor: function () {
       this.subviews = {};
       addEventBinder(this);
-      if (this.navstackable) {
-        _.defaults(this, Navstackable);
-      }
 
       Backbone.View.prototype.constructor.apply(this, arguments);
 
