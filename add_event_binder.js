@@ -1,7 +1,7 @@
 define(function (require) {
 
   var _           = require("underscore");
-  var EventBinder = require("backbone-eventbinder");
+  var EventBinder = require("backbone.eventbinder");
 
   return function addEventBinder(target) {
     var eventBinder = new EventBinder();
