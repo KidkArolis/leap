@@ -81,12 +81,15 @@ define(function (require) {
       if (Backbone.history._hasPushState) {
         var rootURL = this.options.root;
 
-        if (url !== '') {
+        if (url !== "") {
           rootURL = rootURL.replace(/\/$/, '');
         }
 
         return rootURL + url;
       } else {
+        if (url[0] === "/") {
+          url = url.substr(1);
+        }
         return "#" + url;
       }
     }
