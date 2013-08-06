@@ -18,8 +18,16 @@ define(function (require) {
       var BackboneRouter = Backbone.Router.extend({
         routes: { "*all": "all" },
         all: function (path) {
+          var query = path.split("?")[1];
+          path = path.split("?")[0];
           self.handleURL("/" + path);
-          // mediator.publish("url:params", location.hash.split("?")[1]);
+
+          // for now, we publish the url:params via mediator
+          // we should get some better inspiration from ember-query
+          // about how we could pass these in via the router into the
+          // states
+          var mediator = require("leap/mediator");
+          mediator.publish("url:params", query);
         }
       });
       this.backboneRouter = new BackboneRouter();
