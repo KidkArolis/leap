@@ -184,6 +184,18 @@ define(function (require) {
       return mediator.router.generate.apply(mediator.router, arguments);
     },
 
+    transitionTo: function () {
+      assert("The application needs a router for generating links attached to the mediator",
+        mediator.router);
+      return mediator.router.transitionTo.apply(mediator.router, arguments);
+    },
+
+    replaceWith: function () {
+      assert("The application needs a router for generating links attached to the mediator",
+        mediator.router);
+      return mediator.router.replaceWith.apply(mediator.router, arguments);
+    },
+
     getTemplateData: function () {},
 
     // This method binds the elements specified in the "ui" hash inside the
