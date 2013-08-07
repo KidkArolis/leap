@@ -18,7 +18,11 @@ define(function (require) {
 
     activate: function () {
       this.beforeActivate();
-      this.view = this.createView();
+      // the view might have been created
+      // in a different hook already
+      if (!this.view) {
+        this.view = this.createView();
+      }
       if (this.view) {
         this.injectView(this.renderView());
       }
