@@ -41,7 +41,7 @@ define(function (require) {
       var router = this.router;
       $(document).on("click", "a:not([data-bypass])", function (evt) {
         var href = $(this).attr("href");
-        if (href.length > 0 && href[0] !== "#" && href.indexOf("javascript:") !== 0) {
+        if (href && href.length > 0 && href[0] !== "#" && href.indexOf("javascript:") !== 0) {
           var protocol = this.protocol + "//";
           if (href && href.slice(protocol.length) !== protocol) {
             evt.preventDefault();
