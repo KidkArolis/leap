@@ -32,7 +32,13 @@ define(function (require) {
       router.map(this.options.routes);
       router.startRouting();
 
-      this.interceptLinks();
+      // we want to intercept all link clicks in case we're using push state
+      // we want all link clicks to be handled via the router instead of
+      // browser reloading the page
+      if (router && router.location && router.location.usesPushState &&
+          router.location.usesPushState()) {
+        this.interceptLinks();
+      }
 
       return this;
     },

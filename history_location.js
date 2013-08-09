@@ -34,6 +34,10 @@ define(function (require) {
       Backbone.history.start(_.extend(options));
     },
 
+    usesPushState: function () {
+      return this.options.pushState;
+    },
+
     getURL: function () {
       return this.path;
     },
