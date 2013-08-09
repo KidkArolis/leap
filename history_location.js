@@ -3,6 +3,14 @@ define(function (require) {
   var _        = require("underscore");
   var Backbone = require("backbone");
 
+  // save the current scroll position at all times
+  // for use when back/forward buttons are used
+  var $ = require("jquery");
+  var currentScroll;
+  $(window).scroll(function () {
+    currentScroll = window.scrollY;
+  });
+
   var BackboneHistoryLocation = function (options) {
     this.options = _.extend({
       pushState: true,
@@ -18,6 +26,17 @@ define(function (require) {
       var BackboneRouter = Backbone.Router.extend({
         routes: { "*all": "all" },
         all: function (path) {
+
+          // experimental feature: preserving scroll upon
+          // navigation
+          window.scrollTo(0, currentScroll);
+          _.defer(function () {
+            window.scrollTo(0, currentScroll);
+          });
+          _.delay(function () {
+            window.scrollTo(0, currentScroll);
+          }, 1);
+
           var query = path.split("?")[1];
           path = path.split("?")[0];
           self.handleURL("/" + path);
