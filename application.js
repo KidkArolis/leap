@@ -4,6 +4,7 @@ define(function (require) {
   var _          = require("underscore");
   var mediator   = require("./mediator");
   var Router     = require("cherrytree/router");
+  var State      = require("./state");
   var LeapObject = require("./object");
 
   return LeapObject.extend({
@@ -29,6 +30,13 @@ define(function (require) {
       router.urlChanged = function (url) {
         mediator.publish("transitioned", url);
       };
+      // add default impl of an application state
+      // in case a custom one is not provided
+      router.state("application", State.extend({
+        createOutlet: function () {
+          this.outlet = $(document.body);
+        }
+      }));
       router.map(this.options.routes);
       router.startRouting();
 
@@ -66,12 +74,14 @@ define(function (require) {
 
   /**
 
-    TODO:
+    TODO
     * for all leaf states, make sure there's a State class provided
     * throw if application state is not defined? or better fallback to a default
       one that injects things into body!
-    * make sure the latest modifications to aborting transitions don't affect us
-      in unexepcted way - something about reusing models, might not be desired?
+    * don't attach router to the mediator
+      (views should use the router from the state or smth, e.g. like linkTo helper
+      does, there should be a transitionTo and replaceWith on the view).
+      For convenience, expose window.__app.router or smth
 
   */
 
