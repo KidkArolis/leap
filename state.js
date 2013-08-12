@@ -12,8 +12,6 @@ define(function (require) {
       this.viewOptions = {};
     },
 
-    prepare: function () {},
-
     beforeActivate: function () {},
 
     activate: function () {
