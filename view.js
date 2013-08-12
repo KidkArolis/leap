@@ -179,21 +179,21 @@ define(function (require) {
 
     // a way to generate links, delegates to router.generate
     linkTo: function () {
-      assert("The application needs a router for generating links attached to the mediator",
-        mediator.router);
-      return mediator.router.generate.apply(mediator.router, arguments);
+      if (mediator.router) {
+        return mediator.router.generate.apply(mediator.router, arguments);
+      }
     },
 
     transitionTo: function () {
-      assert("The application needs a router for generating links attached to the mediator",
-        mediator.router);
-      return mediator.router.transitionTo.apply(mediator.router, arguments);
+      if (mediator.router) {
+        return mediator.router.transitionTo.apply(mediator.router, arguments);
+      }
     },
 
     replaceWith: function () {
-      assert("The application needs a router for generating links attached to the mediator",
-        mediator.router);
-      return mediator.router.replaceWith.apply(mediator.router, arguments);
+      if (mediator.router) {
+        return mediator.router.replaceWith.apply(mediator.router, arguments);
+      }
     },
 
     getTemplateData: function () {},
