@@ -149,7 +149,7 @@ define(function (require) {
       }
       this.$el.html(html);
       _.each(this.subviews, function (view, name) {
-        this.assign("." + dashify(name) + "-container", name);
+        this.autoAssign(name);
       }, this);
       if (this.bindings) {
         this.stickit();
@@ -241,6 +241,10 @@ define(function (require) {
 
         view.bindTo(entity, evt, method, view);
       });
+    },
+
+    autoAssign: function (name) {
+      this.assign("." + dashify(name) + "-container", name);
     },
 
     assign: function (selector, view) {
