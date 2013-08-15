@@ -1,0 +1,19 @@
+{
+  "name": "leap",
+  "version": "0.3.0",
+  "description": "Leap is a mini application framework based on Backbone.",
+  "main": "add_event_binder.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/KidkArolis/leap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KidkArolis/leap/issues"
+  },
+  "dependencies": {
+    "karma": "~0.8.8"
+  }
+}
