@@ -90,7 +90,7 @@ define(function (require) {
           // destroyed already
           var destroyed = true;
           eachNested([subview], function (s) {
-            destroyed && s.destroyed;
+            destroyed = destroyed && s.destroyed;
           });
           // also, only reattach if we have a selector for this view,
           // so for example if a modal subview has been rendered into the body
