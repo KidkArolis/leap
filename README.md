@@ -130,3 +130,7 @@ LeapView.extend({
   * view: consistently support views, arrays of views and plain objects with views as values in subviewCreators/createSubview/renderSubviews.
   * remove bindTo in favor of Backbone's native listenTo (shim it for older versions of Backbone)
   * add listenToDOM for doing listenTos on DOM elements
+  * consider adding removeSubviews or destroySubviews - the use case is that sometimes views need to recreate a single/list of
+    subviews, and each time, we have to manually call renderSubviews, because after it's been rendered once, it's now cached
+    in this._subviewsRendered - the view thinks these views have already been rendered. Perhaps we could check by reference, not
+    just by name.
