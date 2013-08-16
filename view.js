@@ -82,7 +82,7 @@ define(function (require) {
 
       // render this.subviews that haven't been rendered before
       _.each(this.subviews, function (subview, subviewName) {
-        if (!this._subviewsRendered[subviewName]) {
+        if (!this._subviewsRendered[subviewName] || this._subviewsRendered[subviewName] !== subview) {
           this.renderSubviews(subviewName);
         } else {
           // if the view has been rendered, it means we detached it
