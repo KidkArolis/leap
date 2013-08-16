@@ -169,8 +169,17 @@ define(function (require) {
     // ---------------------------
 
     bindEvents: function () {
-      this.bindBackboneEntityTo(this.model, this.modelEvents);
-      this.bindBackboneEntityTo(this.collection, this.collectionEvents);
+      this._modelEvents = this.bindBackboneEntityTo(this.model, this.modelEvents);
+      this._collectionEvents = this.bindBackboneEntityTo(this.collection, this.collectionEvents);
+    },
+
+    unbindEvents: function () {
+      var view = this;
+      _.each([this._modelEvents, this._collectionEvents], function (bindings) {
+        _.each(bindings, function (b) {
+          view.unbindFrom(b);
+        });
+      });
     },
 
     // This method is used to bind a backbone "entity" (collection/model) to
@@ -179,7 +188,7 @@ define(function (require) {
       if (!entity || !bindings) { return; }
 
       var view = this;
-      _.each(bindings, function (methodName, evt) {
+      return _.map(bindings, function (methodName, evt) {
 
         var method = view[methodName];
         if (!method) {
@@ -187,7 +196,7 @@ define(function (require) {
             "' was configured as an event handler, but does not exist.");
         }
 
-        view.bindTo(entity, evt, method, view);
+        return view.bindTo(entity, evt, method, view);
       });
     },
 

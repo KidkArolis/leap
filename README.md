@@ -109,13 +109,14 @@ LeapView.extend({
 
 ### 0.4.0
 
-* improved support for subviews
+* improve support for subviews
   * `subviewCreators` hash can house subview constructors - when rendering they will be lazily instantiated if a container for them exists in the elements DOM
   * `renderSubviews` helper can be used to rerender subviews
-  * `createSubview` helper cab be used to create new subviews or replace an existing subview's instance and immediately rerender it
-* replaced `assign` with `renderSubviews` and `replaceSubview` with `createSubview`
-* renamed `getTemplateData` to `templateData`
-* removed `leap/model` and `leap/collection`
+  * `createSubview` helper can be used to create new subviews or replace an existing subview's instance and immediately rerender it
+* replace `assign` with `renderSubviews` and `replaceSubview` with `createSubview`
+* add `unbindEvents` method which does the opposite of `bindEvents`
+* rename `getTemplateData` to `templateData`
+* remove `leap/model` and `leap/collection`
 * a default `application` state is provided that renders content into `document.body`
 
 ## TODO
