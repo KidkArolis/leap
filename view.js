@@ -1,86 +1,14 @@
 define(function (require) {
 
-  /**
-  
-  Leap/View
-  
-  is a base view that provides the following features for your Backbone Views
-
-  
-  * bindTo, unbindFrom, unbindAll methods provided by backbone-eventbinder
-    that enable automatic event unbinding in the destroy method
-
-  
-  * destroy method inspired by Marionette and Chaplin that destroys subviews,
-    unbinds events that were bound to via bindTo, and performs other sorts of
-    cleanup. If you want to run some custom destroy code, you can implement
-    `beforeDestroy` method in your view.
-
-  
-  * subview convention of storing all subviews in this.subviews hash. If the
-    convention is followed, then `assign` method can be used for rendering
-    the subviews and destroy methods will destroy all of the subviews.
-
-    Example:
-    ```
-    // store views
-    this.subviews.toolbar = new ToolbarView();
-    // or arrays of views
-    this.subviews.items = _.map([1,2,3], function (id) {
-      return new ItemView({ id: id});
-    });
-    ```
-
-
-  * assign method for rendering subviews into the view. If an array of views
-    is passed, it loops over them and inserts them all
-    (Inspired by
-      http://ianstormtaylor.com/assigning-backbone-subviews-made-even-cleaner/)
-
-    Example:
-    ```
-    this.assign({
-      '.subview'             : "toolbar", // will grab this.subviews.toolbar
-      '.list-of-items'       : "items",   // an array of views
-      '.yet-another-subview' : this.subviews.yetanother // pass by reference
-    });
-    ```
-
-
-  * `bindUIElements` method can be used to bind a `ui` hash for easy access of
-     DOM elements in the view.
-
-    Example
-    ```
-      LeapView.extend({
-
-        ui: {
-          checkbox: "input[type=checkbox]"
-        },
-
-        onRender: function() {
-          if (this.model.get("selected")) {
-            this.ui.checkbox.addClass('checked');
-          }
-        }
-      });
-    ```
-
-
-  */
-
-
   // TODO temporary
   // require these Backbone Plugins to ensure correct order. If things get
   // loaded out of order, the plugins augment Backbone only after LeapView
   // extends Backbone.View
   require("backbone.stickit");
 
-
   var _              = require("underscore");
   var $              = require("jquery");
   var Backbone       = require("backbone");
-  var assert         = require("./assert");
   var mediator       = require("./mediator");
   var addEventBinder = require("./add_event_binder");
 
@@ -143,7 +71,7 @@ define(function (require) {
         if (!_.isFunction(this.template)) {
           throw new Error("template should be a function");
         }
-        html = this.template(_.extend({}, this.defaultTemplateData(), this.getTemplateData()));
+        html = this.template(_.extend({}, this.defaultTemplateData(), this.templateData()));
       } else {
         html = "";
       }
@@ -196,7 +124,7 @@ define(function (require) {
       }
     },
 
-    getTemplateData: function () {},
+    templateData: function () {},
 
     // This method binds the elements specified in the "ui" hash inside the
     // view's code with the associated jQuery selectors.
