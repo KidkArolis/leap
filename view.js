@@ -404,8 +404,13 @@ define(function (require) {
       // render and inject them all into their container
       eachNested([view], function (v, key, inner) {
         if (!options.skipRender) {
+          // redelegate events using setElement in case they were lost
+          // but I think this is not needed anymore
           v.setElement(v.$el).render();
         }
+        // detach the view first not to blow off the events, etc.
+        v.$el.detach();
+        // reattach
         var injector = inner ? "append" : "html";
         $container[injector](v.el);
       });
