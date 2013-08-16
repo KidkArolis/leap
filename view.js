@@ -12,10 +12,6 @@ define(function (require) {
   var mediator       = require("./mediator");
   var addEventBinder = require("./add_event_binder");
 
-  // var upcase = function (str) {
-  //   return str.charAt(0).toUpperCase() + str.substring(1);
-  // };
-
   var dashify = function (str) {
     return str.replace(/([A-Z])/g, function ($1) {
       return "-" + $1.toLowerCase();
@@ -32,34 +28,9 @@ define(function (require) {
 
       this.bindEvents();
 
-      // this.wrapMethod("render");
+      this._subviewsRendered = {};
+      this._subviewContainerSelectors = {};
     },
-
-    // wrapMethod: function (name) {
-    //   var instance = this;
-    //   // Enclose the original function
-    //   var func = instance[name];
-    //   // Set a flag
-    //   instance["" + name + "IsWrapped"] = true;
-    //   // Create the wrapper method
-    //   instance[name] = function () {
-    //     // Stop if the view was already disposed
-    //     if (this.destroyed) {
-    //       return false;
-    //     }
-    //     console.log("_after" + (upcase(name)));
-    //     // Call the original method
-    //     func.apply(instance, arguments);
-    //     // Call the corresponding `after-` method
-    //     instance["_after" + (upcase(name))].apply(instance, arguments);
-    //     // Return the view
-    //     return instance;
-    //   };
-    // },
-
-    // _afterRender: function () {
-    //   this.bindUIElements();
-    // },
 
     render: function () {
       if (this.destroyed) {
