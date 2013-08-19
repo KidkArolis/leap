@@ -80,6 +80,12 @@ define(function (require) {
       // before we render the subviews - bind the UI elements
       this.bindUIElements();
 
+      // ensure all required subviews are created using their factory
+      // from subviewCreators hash
+      _.each(this.subviewCreators, function (factory, subviewName) {
+        this._ensureSubviewCreated(subviewName);
+      }, this);
+
       // render this.subviews that haven't been rendered before
       _.each(this.subviews, function (subview, subviewName) {
         if (!this._subviewsRendered[subviewName] || this._subviewsRendered[subviewName] !== subview) {
