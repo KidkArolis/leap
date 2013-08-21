@@ -117,6 +117,7 @@ LeapView.extend({
 * add `unbindEvents` method which does the opposite of `bindEvents`
 * rename `getTemplateData` to `templateData`
 * remove `leap/model` and `leap/collection`
+* remove "afterRender" event
 * a default `application` state is provided that renders content into `document.body`
 
 ## TODO
@@ -134,3 +135,6 @@ LeapView.extend({
     subviews, and each time, we have to manually call renderSubviews, because after it's been rendered once, it's now cached
     in this._subviewsRendered - the view thinks these views have already been rendered. Perhaps we could check by reference, not
     just by name.
+  * createSubview without a second argument should create the subview with the name provided if 
+    defined in subviewCreators
+  * connect hash for connecting subviews to model values - follow stickit API - can this be done with stickit directly? via leap

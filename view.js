@@ -116,8 +116,6 @@ define(function (require) {
       }
 
       this.afterRender();
-      // TODO: investigate why this event is needed, can we avoid having it?
-      this.trigger("afterRender");
       
       return this;
     },
