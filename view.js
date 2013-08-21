@@ -303,7 +303,7 @@ define(function (require) {
           } else {
             // render using the renderSubview helper that will
             // try to find the container based on the subview name
-            this.renderSubview(subviewName);
+            this.renderSubviews(subviewName);
           }
         }
       }
