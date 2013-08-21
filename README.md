@@ -110,9 +110,10 @@ LeapView.extend({
 ### 0.4.0
 
 * improve support for subviews
-  * `subviewCreators` hash can house subview constructors - when rendering they will be lazily instantiated if a container for them exists in the elements DOM
+  * `subviewCreators` hash can house subview constructors - when rendering they will be lazily   instantiated if a container for them exists in the elements DOM
   * `renderSubviews` helper can be used to rerender subviews
-  * `createSubview` helper can be used to create new subviews or replace an existing subview's instance and immediately rerender it
+  * `createSubview` helper can be used to create new subviews or replace an existing subview's    instance and immediately rerender it. Subview instance can be created using subviewCreators, e.g. `createSubview('someModal', {appendTo: $("body")})` will lookup someModal in subviewCreators, create it and render it into body.
+  * `destroySubview` helper can destroy subviews by name
 * replace `assign` with `renderSubviews` and `replaceSubview` with `createSubview`
 * add `unbindEvents` method which does the opposite of `bindEvents`
 * rename `getTemplateData` to `templateData`
@@ -135,6 +136,4 @@ LeapView.extend({
     subviews, and each time, we have to manually call renderSubviews, because after it's been rendered once, it's now cached
     in this._subviewsRendered - the view thinks these views have already been rendered. Perhaps we could check by reference, not
     just by name.
-  * createSubview without a second argument should create the subview with the name provided if 
-    defined in subviewCreators
   * connect hash for connecting subviews to model values - follow stickit API - can this be done with stickit directly? via leap

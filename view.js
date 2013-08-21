@@ -220,7 +220,7 @@ define(function (require) {
       render("subview1", "subview2");
       render(["subview1", "subview2"]);
       render({
-        ".custom-container-class": "subview1
+        ".custom-container-class": "subview1"
       });
     */
     renderSubviews: function () {
@@ -263,20 +263,59 @@ define(function (require) {
       this.createSubview("search");
     */
     createSubview: function (subviewName, newSubviewInstance, options) {
+      // if options passed as a second argument
+      if (arguments.length === 2 && $.isPlainObject(newSubviewInstance)) {
+        options = newSubviewInstance;
+        newSubviewInstance = null;
+      }
+
       options = _.extend({
         render: true
       }, options);
 
-      if (this.subviews[subviewName]) {
-        this.subviews[subviewName].destroy();
-        delete this.subviews[subviewName];
+      this.destroySubview(subviewName);
+
+      // if subview wasn't passed in, try to find it in subview creators
+      if (!newSubviewInstance) {
+        if (this.subviewCreators[subviewName]) {
+          newSubviewInstance = this.subviewCreators[subviewName].apply(this);
+        }
       }
 
+      // if we have a new subview instance, attach it to this.subviews
+      // and render if needed
       if (newSubviewInstance) {
         this.subviews[subviewName] = newSubviewInstance;
         if (options.render) {
-          this.renderSubviews(subviewName);
+          var container, injector;
+          _.find(["into", "prependTo", "appendTo"], function (i) {
+            if (options[i]) {
+              container = options[i];
+              injector = i;
+              return true;
+            }
+          });
+          if (container) {
+            // render into a specified container
+            this._renderSubview(container, subviewName, {
+              injector: injector
+            });
+          } else {
+            // render using the renderSubview helper that will
+            // try to find the container based on the subview name
+            this.renderSubview(subviewName);
+          }
         }
+      }
+
+      return newSubviewInstance;
+    },
+
+    destroySubview: function (subviewName) {
+      // destroy the old subview
+      if (this.subviews[subviewName]) {
+        this.subviews[subviewName].destroy();
+        delete this.subviews[subviewName];
       }
     },
 
@@ -385,10 +424,18 @@ define(function (require) {
 
     _renderSubview: function (selector, view, options) {
       options = _.extend({
-        skipRender: false
+        skipRender: false,
+        injector: "into"
       }, options);
 
-      var $container = this.$(selector);
+      var jQueryInjectors = {
+        "into": "html",
+        "appendTo": "append",
+        "prependTo": "prepend"
+      };
+      options.injector = jQueryInjectors[options.injector];
+
+      var $container = selector.jquery ? selector : this.$(selector);
       // don't render if there is no container for this view
       // in $el's dom
       if (!$container.length) {
@@ -404,6 +451,13 @@ define(function (require) {
         throw new Error("Subview '" + viewName + "' doesn't exist");
       }
 
+      // in case of array or object of views clear the container first
+      // if injector is html
+      if (_.isArray(view) || $.isPlainObject(view)) {
+        if (options.injector === "html") {
+          $container.empty();
+        }
+      }
       // now that we have a view instance, or array/object of view instances
       // render and inject them all into their container
       eachNested([view], function (v, key, inner) {
@@ -415,7 +469,7 @@ define(function (require) {
         // detach the view first not to blow off the events, etc.
         v.$el.detach();
         // reattach
-        var injector = inner ? "append" : "html";
+        var injector = inner && options.injector === "html" ? "append" : options.injector;
         $container[injector](v.el);
       });
 
