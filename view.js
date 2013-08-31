@@ -116,7 +116,9 @@ define(function (require) {
       }
 
       this.afterRender();
-      
+      // used by leap/connect
+      this.trigger("afterRender");
+
       return this;
     },
 
@@ -320,7 +322,7 @@ define(function (require) {
     },
 
 
-    
+
     // Cherrytree router helpers
     // -------------------------
 
@@ -414,7 +416,7 @@ define(function (require) {
     // events or destroying non leap views (e.g. jquery plugins), etc.
     beforeDestroy: function () {},
 
-    
+
     // private methods
 
     // can be used in templates for generating container divs
