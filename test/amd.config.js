@@ -8,7 +8,7 @@ require.config({
     "cherrytree": "bower_components/cherrytree",
     "router": "bower_components/router.js/dist/router.amd",
     "route-recognizer": "bower_components/route-recognizer/dist/route-recognizer.amd",
-    "rsvp": "bower_components/rsvp.js/browser/rsvp"
+    "rsvp": "bower_components/rsvp/rsvp.amd"
   },
   shim: {
     "underscore": {

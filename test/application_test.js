@@ -1,11 +1,12 @@
 define(function (require) {
 
+  var $ = require("jquery");
   var Application = require("application");
   var State = require("state");
 
   describe("Application", function () {
 
-    var application, spies = {};
+    var application, routes, spies = {};
 
     beforeEach(function () {
       routes = function () {

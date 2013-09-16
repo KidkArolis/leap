@@ -16,5 +16,8 @@
     "backbone": ">=0.9.2",
     "cherrytree": "git@github.com:KidkArolis/cherrytree.git",
     "backbone.eventbinder": "marionettejs/backbone.eventbinder#~1.0.2"
+  },
+  "devDependencies": {
+    "chai": "*"
   }
 }
