@@ -40,6 +40,12 @@ define(function (require) {
     beforeDestroy: function () {},
 
     destroy: function () {
+      if (this.destroyed) {
+        return;
+      }
+
+      this.destroyed = true;
+
       this.beforeDestroy();
       if (this.view) {
         this.view.destroy();
