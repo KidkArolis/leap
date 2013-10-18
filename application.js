@@ -60,6 +60,7 @@ define(function (require) {
           if (href && href.slice(protocol.length) !== protocol) {
             evt.preventDefault();
             // handle the URL manually
+            // TODO explore wether router.transitionTo(href) is the right thing to do here
             router.handleURL(href).then(function () {
               // and update the url in the address bar if the transition
               // was successful
