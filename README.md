@@ -1,8 +1,8 @@
 # Leap
 Leap is a mini application framework based on Backbone.
 
-The main features are a more powerful View class and integration to a hierarchical stateful router called Cherrytree. 
-  
+The main features are a more powerful View class and integration to a hierarchical stateful router called Cherrytree.
+
 Leap View features:
 
   * subview support
@@ -16,7 +16,7 @@ Leap is AMD and is a bower component.
 ### Leap/View
 
 Leap View is a base view that provides the following features for your Backbone Views
-  
+
 #### bindTo, unbindFrom, unbindAll
 
 These methods are proxies to backbone-eventbinder that enable automatic event unbinding in the destroy method.
@@ -91,7 +91,7 @@ cleanup. If you want to run some custom destroy code, you can implement
 #### ui hash
 
 a `ui` hash can be defined for easy access of DOM elements in the view.
-  
+
 ```js
 LeapView.extend({
   ui: {
@@ -137,3 +137,4 @@ LeapView.extend({
     in this._subviewsRendered - the view thinks these views have already been rendered. Perhaps we could check by reference, not
     just by name.
   * connect hash for connecting subviews to model values - follow stickit API - can this be done with stickit directly? via leap
+  * consider intercepting #hash clicks as well, and call transitionTo instead of relying on the regular link behaviour, this would mean the URL isn't updated until the transition is complete, which might be a slightly more correct behaviour, given that when transition fails, the view+router state isn't updated, so it might be good to keep the URL in sync as well
