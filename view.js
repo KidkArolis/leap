@@ -196,7 +196,7 @@ define(function (require) {
       var view = this;
       return _.map(bindings, function (methodName, evt) {
 
-        var method = view[methodName];
+        var method = _.isString(methodName) ? view[methodName] : methodName;
         if (!method) {
           throw new Error("View method '" + methodName +
             "' was configured as an event handler, but does not exist.");
