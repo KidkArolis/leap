@@ -53,20 +53,24 @@ define(function (require) {
 
     interceptLinks: function () {
       var router = this.router;
+      // ignore links with data-bypass attribute
       $(document).on("click", "a:not([data-bypass])", function (evt) {
+        // ignore cmd+click - those should open in new tab
+        if (evt.metaKey) {
+          return;
+        }
         var href = $(this).attr("href");
-        if (href && href.length > 0 && href[0] !== "#" && href.indexOf("javascript:") !== 0) {
-          var protocol = this.protocol + "//";
-          if (href && href.slice(protocol.length) !== protocol) {
-            evt.preventDefault();
-            // handle the URL manually
-            // TODO explore wether router.transitionTo(href) is the right thing to do here
-            router.handleURL(href).then(function () {
-              // and update the url in the address bar if the transition
-              // was successful
-              router.location.setURL(href);
-            });
-          }
+        if (href &&
+            href.length > 0 &&
+            // don't intercept hash links
+            href[0] !== "#" &&
+            // don't intercept external/absolute links
+            href.indexOf("http://") !== 0 &&
+            href.indexOf("https://") !== 0 &&
+            // or thes kind of links
+            href.indexOf("javascript:") !== 0) {
+          evt.preventDefault();
+          router.transitionTo(href);
         }
       });
 
