@@ -12,8 +12,7 @@ define(function (require) {
     options: {
       location: "none",
       logging: false,
-      routes: function  () {},
-      user: null
+      routes: function  () {}
     },
 
     constructor: function (options) {
@@ -21,8 +20,6 @@ define(function (require) {
     },
 
     start: function () {
-      // not sure this is the best thing to do, but this is legacy for now
-      mediator.user = this.options.user;
       var router = this.router = mediator.router = new Router({
         location: this.options.location,
         logging: this.options.logging
