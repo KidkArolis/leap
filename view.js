@@ -278,7 +278,11 @@ define(function (require) {
       this.destroySubview(subviewName);
 
       // if subview wasn't passed in, try to find it in subview creators
-      if (!newSubviewInstance) {
+      // TODO: if no instance is passed in and the subview creators don't
+      // exist - perhaps we should throw an error instead of failing silently
+      // on the other hand - this simply destroys the existing instance of any
+      // without doing anything further - might be a feature?
+      if (!newSubviewInstance && this.subviewCreators) {
         if (this.subviewCreators[subviewName]) {
           newSubviewInstance = this.subviewCreators[subviewName].apply(this);
         }
