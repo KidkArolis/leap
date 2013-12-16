@@ -52,6 +52,10 @@ define(function (require) {
       var router = this.router;
       // ignore links with data-bypass attribute
       $(document).on("click", "a:not([data-bypass])", function (evt) {
+        // ignore clicks with prevented default
+        if (evt.isDefaultPrevented()) {
+          return;
+        }
         // ignore cmd+click - those should open in new tab
         if (evt.metaKey) {
           return;
