@@ -175,13 +175,14 @@ define(function (require) {
     // ---------------------------
 
     bindEvents: function () {
+      this._stateEvents = this.bindBackboneEntityTo(this.state, this.stateEvents);
       this._modelEvents = this.bindBackboneEntityTo(this.model, this.modelEvents);
       this._collectionEvents = this.bindBackboneEntityTo(this.collection, this.collectionEvents);
     },
 
     unbindEvents: function () {
       var view = this;
-      _.each([this._modelEvents, this._collectionEvents], function (bindings) {
+      _.each([this._stateEvents, this._modelEvents, this._collectionEvents], function (bindings) {
         _.each(bindings, function (b) {
           view.unbindFrom(b);
         });
