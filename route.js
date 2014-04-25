@@ -1,12 +1,8 @@
 define(function (require) {
 
-  var State = require("cherrytree/state");
+  var Route = require("cherrytree/route");
 
-  return State.extend({
-
-    // constructor: function () {
-    //   console.log("constructing");
-    // },
+  return Route.extend({
 
     initialize: function () {
       this.viewOptions = {};
@@ -15,17 +11,17 @@ define(function (require) {
     beforeActivate: function () {},
 
     activate: function () {
-      this.beforeActivate();
+      this.beforeActivate.apply(this, arguments);
       // the view might have been created
       // in a different hook already
       if (!this.view) {
-        this.view = this.createView();
+        this.view = this.createView.apply(this, arguments);
       }
       if (this.view) {
         this.injectView(this.renderView());
       }
       this.createOutlet();
-      this.afterActivate();
+      this.afterActivate.apply(this, arguments);
     },
 
     afterActivate: function () {},
@@ -37,18 +33,13 @@ define(function (require) {
       }
     },
 
-    beforeDestroy: function () {},
+    beforeDeactivate: function () {},
 
-    destroy: function () {
-      if (this.destroyed) {
-        return;
-      }
-
-      this.destroyed = true;
-
-      this.beforeDestroy();
+    deactivate: function () {
+      this.beforeDeactivate();
       if (this.view) {
         this.view.destroy();
+        delete this.view;
       }
     },
 
