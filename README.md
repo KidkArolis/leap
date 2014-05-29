@@ -107,6 +107,10 @@ LeapView.extend({
 
 ## Changelog
 
+### 0.6.0
+
+* `beforeRender/afterRender` are now called with the arguments that `render` was called with
+
 ### 0.5.0
 
 * `stateEvents` hash for a special `state` model of the view. Use state model to represent the state of the view as opposed to the regular model representing data. Read more about state vs props here http://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html#what-should-go-in-state.

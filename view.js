@@ -48,7 +48,7 @@ define(function (require) {
       if (this.destroyed) {
         return this;
       }
-      this.beforeRender();
+      this.beforeRender.apply(this, arguments);
       var html = "";
       if (this.template) {
         if (!_.isFunction(this.template)) {
@@ -115,7 +115,7 @@ define(function (require) {
         this.stickit();
       }
 
-      this.afterRender();
+      this.afterRender.apply(this, arguments);
       // used by leap/connect
       this.trigger("afterRender");
 
