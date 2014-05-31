@@ -1,11 +1,5 @@
 define(function (require) {
 
-  // TODO temporary
-  // require these Backbone Plugins to ensure correct order. If things get
-  // loaded out of order, the plugins augment Backbone only after LeapView
-  // extends Backbone.View
-  require("backbone.stickit");
-
   var _              = require("underscore");
   var $              = require("jquery");
   var Backbone       = require("backbone");
@@ -109,11 +103,6 @@ define(function (require) {
           }
         }
       }, this);
-
-      // TODO: remove dependency on stickit
-      if (this.bindings) {
-        this.stickit();
-      }
 
       this.afterRender.apply(this, arguments);
       // used by leap/connect

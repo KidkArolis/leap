@@ -108,6 +108,10 @@ LeapView.extend({
 
 ## Changelog
 
+### 0.7.0
+
+* remove dependency on Backbone.Stickit. Leap no longer cares about what dom bindings library is used if any.
+
 ### 0.6.0
 
 * `beforeRender/afterRender` are now called with the arguments that `render` was called with
@@ -135,7 +139,6 @@ LeapView.extend({
   * tests
   * docs
   * look into restructuring the dirs
-  * remove dependency on stickit - it can easily be mixed in into views that require it
   * view: pass a helper function to the template <%= subview("grid") %>
   * view: add subviewCreators hash - functions that will be called to create subviews as their containers are found in the DOM after render, it also doesn't rerender the subviews every time, instead it detaches them and reattaches.
   * view: consistently support views, arrays of views and plain objects with views as values in subviewCreators/createSubview/renderSubviews.
