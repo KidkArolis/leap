@@ -2,9 +2,7 @@
 
 [ ![Codeship Status for KidkArolis/leap](https://codeship.io/projects/eaf60910-0147-0131-111c-7a4299a05af4/status?branch=master)](https://codeship.io/projects/7060)
 
-Leap is a mini application framework based on Backbone.
-
-The main features are a more powerful View class and integration to a hierarchical stateful router called Cherrytree.
+Leap is a nestable base view for Backbone.
 
 Leap View features:
 
@@ -12,7 +10,7 @@ Leap View features:
   * default renderer
   * destroy method for cleanup
 
-Leap is AMD and is a bower component.
+Leap current supports AMD and bower.
 
 ## Docs
 
@@ -112,8 +110,10 @@ LeapView.extend({
 
 ### 0.7.0
 
-* remove dependency on Backbone.Stickit. Leap no longer cares about what dom bindings library is used if any.
-* rename destroy to remove to be compatible with Backbone, but alias remove as destroy for backwards compatibility. `LeapView.destroy` is now **deprecated**.
+* remove dependency on Backbone.Stickit. Leap no longer cares about what dom bindings library is used if any
+* rename destroy to remove to be compatible with Backbone, but alias remove as destroy for backwards compatibility. `LeapView.destroy` is now **deprecated**
+* remove no longer used modules: `assert`, `object` and `history_location`
+* bundle in the event_binder module instead of pulling it in as a dependency for less setup
 
 ### 0.6.0
 
@@ -139,9 +139,6 @@ LeapView.extend({
 
 ## TODO
 
-  * tests
-  * docs
-  * look into restructuring the dirs
   * view: pass a helper function to the template <%= subview("grid") %>
   * view: add subviewCreators hash - functions that will be called to create subviews as their containers are found in the DOM after render, it also doesn't rerender the subviews every time, instead it detaches them and reattaches.
   * view: consistently support views, arrays of views and plain objects with views as values in subviewCreators/createSubview/renderSubviews.

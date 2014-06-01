@@ -33,8 +33,7 @@ module.exports = function(config) {
       resolve: {
         modulesDirectories: ["bower_components", "node_modules"],
         alias: {
-          "jquery": "jquery/dist/jquery",
-          "backbone.eventbinder": "backbone.eventbinder/lib/amd/backbone.eventbinder"
+          "jquery": "jquery/dist/jquery"
         }
       }
     },
