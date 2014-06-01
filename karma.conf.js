@@ -29,9 +29,11 @@ module.exports = function(config) {
     browsers: ['Chrome'],
 
     webpack: {
+      amd: { jQuery: true },
       resolve: {
         modulesDirectories: ["bower_components", "node_modules"],
         alias: {
+          "jquery": "jquery/dist/jquery",
           "backbone.eventbinder": "backbone.eventbinder/lib/amd/backbone.eventbinder"
         }
       }
