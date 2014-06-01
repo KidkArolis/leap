@@ -114,6 +114,7 @@ LeapView.extend({
 * rename destroy to remove to be compatible with Backbone, but alias remove as destroy for backwards compatibility. `LeapView.destroy` is now **deprecated**
 * remove no longer used modules: `assert`, `object` and `history_location`
 * bundle in the event_binder module instead of pulling it in as a dependency for less setup
+* remove the `route` module, it's been moved to it's own project at [backbone-route](https://github.com/QubitProducts/backbone-route). Leap is now only concerned with being a backbone view.
 
 ### 0.6.0
 
@@ -139,14 +140,10 @@ LeapView.extend({
 
 ## TODO
 
-  * view: pass a helper function to the template <%= subview("grid") %>
-  * view: add subviewCreators hash - functions that will be called to create subviews as their containers are found in the DOM after render, it also doesn't rerender the subviews every time, instead it detaches them and reattaches.
   * view: consistently support views, arrays of views and plain objects with views as values in subviewCreators/createSubview/renderSubviews.
   * remove bindTo in favor of Backbone's native listenTo (shim it for older versions of Backbone)
   * add listenToDOM for doing listenTos on DOM elements
-  * consider adding removeSubviews or destroySubviews - the use case is that sometimes views need to recreate a single/list of
-    subviews, and each time, we have to manually call renderSubviews, because after it's been rendered once, it's now cached
-    in this._subviewsRendered - the view thinks these views have already been rendered. Perhaps we could check by reference, not
-    just by name.
+  * consider adding removeSubviews or destroySubviews - the use case is that sometimes views need to recreate a single/list of subviews, and each time, we have to manually call renderSubviews, because after it's been rendered once, it's now cached in this._subviewsRendered - the view thinks these views have already been rendered. Perhaps we could check by reference, not just by name.
   * connect hash for connecting subviews to model values - follow stickit API - can this be done with stickit directly? via leap
-  * consider intercepting #hash clicks as well, and call transitionTo instead of relying on the regular link behaviour, this would mean the URL isn't updated until the transition is complete, which might be a slightly more correct behaviour, given that when transition fails, the view+router state isn't updated, so it might be good to keep the URL in sync as well
+  * remove the mediator class
+  * remove the router bits from the leap/view, leap/view shouldn't assume anything about the routing.
