@@ -111,6 +111,7 @@ LeapView.extend({
 ### 0.7.0
 
 * remove dependency on Backbone.Stickit. Leap no longer cares about what dom bindings library is used if any.
+* rename destroy to remove to be compatible with Backbone, but alias remove as destroy for backwards compatibility
 
 ### 0.6.0
 

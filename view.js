@@ -350,6 +350,12 @@ define(function (require) {
     destroyed: false,
 
     destroy: function () {
+      this.remove.apply(this, arguments);
+    },
+
+    // rename destroy to remove for compatibility with backbone
+    // but keep destroy around for backwards compatibility
+    remove: function () {
       if (this.destroyed) {
         return;
       }
@@ -360,6 +366,7 @@ define(function (require) {
 
       // if custom destroying logic is required, put it in the beforeDestroy
       this.beforeDestroy.apply(this, arguments);
+      this.beforeRemove.apply(this, arguments);
 
       // TODO, 13/06/2013, Karolis
       // should we first unbindAll() and off() the events? so that if
@@ -383,7 +390,7 @@ define(function (require) {
 
       // Remove the topmost element from DOM. This also removes all event
       // handlers from the element and all its children.
-      this.$el.remove();
+      Backbone.View.prototype.remove.apply(this, arguments);
 
       // Remove element references, options,
       // model/collection references and subview lists
@@ -409,6 +416,7 @@ define(function (require) {
     // to all of the default destroy functionality. Good place for unbinding
     // events or destroying non leap views (e.g. jquery plugins), etc.
     beforeDestroy: function () {},
+    beforeRemove: function () {},
 
 
     // private methods
