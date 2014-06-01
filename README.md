@@ -1,5 +1,7 @@
 # Leap
 
+[ ![Codeship Status for KidkArolis/leap](https://codeship.io/projects/eaf60910-0147-0131-111c-7a4299a05af4/status?branch=master)](https://codeship.io/projects/7060)
+
 Leap is a mini application framework based on Backbone.
 
 The main features are a more powerful View class and integration to a hierarchical stateful router called Cherrytree.
@@ -111,7 +113,7 @@ LeapView.extend({
 ### 0.7.0
 
 * remove dependency on Backbone.Stickit. Leap no longer cares about what dom bindings library is used if any.
-* rename destroy to remove to be compatible with Backbone, but alias remove as destroy for backwards compatibility
+* rename destroy to remove to be compatible with Backbone, but alias remove as destroy for backwards compatibility. `LeapView.destroy` is now **deprecated**.
 
 ### 0.6.0
 
