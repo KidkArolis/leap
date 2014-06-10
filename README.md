@@ -8,7 +8,11 @@ Leap View features:
 
   * subview support
   * default renderer
-  * destroy method for cleanup
+  * templateData for declaring what should go into the template
+  * bindTo method similar to listenTo, but also supports DOM events
+  * ui hash for caching DOM elements by selectors
+  * beforeRender, afterRender, beforeRemove hooks
+  * modelEvents, collectionEvents and stateEvents hashes for declaratively binding to model events
 
 Leap current supports AMD and bower.
 
@@ -141,8 +145,6 @@ LeapView.extend({
 ## TODO
 
   * view: consistently support views, arrays of views and plain objects with views as values in subviewCreators/createSubview/renderSubviews.
-  * remove bindTo in favor of Backbone's native listenTo (shim it for older versions of Backbone)
-  * add listenToDOM for doing listenTos on DOM elements
   * consider adding removeSubviews or destroySubviews - the use case is that sometimes views need to recreate a single/list of subviews, and each time, we have to manually call renderSubviews, because after it's been rendered once, it's now cached in this._subviewsRendered - the view thinks these views have already been rendered. Perhaps we could check by reference, not just by name.
   * connect hash for connecting subviews to model values - follow stickit API - can this be done with stickit directly? via leap
   * remove the mediator class
