@@ -487,11 +487,15 @@ define(function (require) {
     _ensureSubviewCreated: function (subviewName) {
       // only initialize the subview if it hasn't been already rendered or initialized
       // also only initialize if the container is available in the DOM
-      if (!this.subviews[subviewName] && this._subviewContainer(subviewName).length) {
+      var $subviewContainer = this._subviewContainer(subviewName);
+      if ($subviewContainer.length > 1) {
+        throw new Error("LeapView: more than one subview container for " + subviewName);
+      }
+      if (!this.subviews[subviewName] && $subviewContainer) {
         if (this.subviewCreators[subviewName]) {
           this.subviews[subviewName] = this.subviewCreators[subviewName].apply(this);
         } else {
-          throw new Error("LeapView: subview creator for", subviewName, "doesn't exist");
+          throw new Error("LeapView: subview creator for " + subviewName + " doesn't exist");
         }
       }
     },
