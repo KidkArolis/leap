@@ -265,7 +265,8 @@ define(function (require) {
         render: true
       }, options);
 
-      this.destroySubview(subviewName);
+      var previousSubview = this.subviews[subviewName];
+      delete this.subviews[subviewName];
 
       // if subview wasn't passed in, try to find it in subview creators
       // TODO: if no instance is passed in and the subview creators don't
@@ -302,6 +303,10 @@ define(function (require) {
             this.renderSubviews(subviewName);
           }
         }
+      }
+
+      if (previousSubview) {
+        previousSubview.destroy();
       }
 
       return newSubviewInstance;
