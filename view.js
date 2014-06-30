@@ -496,7 +496,7 @@ define(function (require) {
       if ($subviewContainer.length > 1) {
         throw new Error("LeapView: more than one subview container for " + subviewName);
       }
-      if (!this.subviews[subviewName] && $subviewContainer) {
+      if (!this.subviews[subviewName] && $subviewContainer.length) {
         if (this.subviewCreators[subviewName]) {
           this.subviews[subviewName] = this.subviewCreators[subviewName].apply(this);
         } else {
