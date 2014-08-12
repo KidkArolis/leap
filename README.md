@@ -112,6 +112,10 @@ LeapView.extend({
 
 ## Changelog
 
+### 0.7.1
+
+* Setting `view.subviews.foo = false` or returning false from a subview creator now skips on rendering that subview instead of throwing an exception. This is useful if you want to conditionally render some subviews.
+
 ### 0.7.0
 
 * remove dependency on Backbone.Stickit. Leap no longer cares about what dom bindings library is used if any

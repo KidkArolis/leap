@@ -456,8 +456,9 @@ define(function (require) {
         viewName = view;
         view = this.subviews[viewName];
       }
+      // don't render anything if the subview was set to false
       if (!view) {
-        throw new Error("Subview '" + viewName + "' doesn't exist");
+        return;
       }
 
       // in case of array or object of views clear the container first
