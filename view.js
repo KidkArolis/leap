@@ -14,7 +14,12 @@ define(function (require) {
 
   return Backbone.View.extend({
 
-    constructor: function () {
+    constructor: function (options) {
+      // restore pre Backbone 1.1 options behaviour
+      // for all LeapView users that are upgrading to
+      // Backbone >= 1.1 
+      this.options = _.extend({}, this.options, options);
+
       this.subviews = {};
       addEventBinder(this);
 
