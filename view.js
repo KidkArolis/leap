@@ -512,17 +512,32 @@ define(function (require) {
     },
 
     _subviewContainer: function (subviewName) {
-      return this.$(this._subviewNameToSelector(subviewName));
+      return this.$(this._subviewNameToSelector(subviewName)).first();
     },
 
     _subviewNameToSelector: function (subviewName) {
-      return "." + this._subviewNameToClass(subviewName);
+      return _.map([
+        this._subviewNameToClass(subviewName),
+        this._subviewNameToPascalClass(subviewName)
+      ], makeClassString).join(", ");
     },
 
     _subviewNameToClass: function (subviewName) {
       return dashify(subviewName) + "-container";
     },
+
+    _subviewNameToPascalClass: function (subviewName) {
+      return capitalize(subviewName + "Container");
+    }
   });
+
+  function capitalize(str) {
+    return str[0].toUpperCase() + str.slice(1);
+  }
+
+  function makeClassString(str) {
+    return "." + str;
+  }
 
   // loops over each key/value of an object, and if value is array/plainObject, loops
   // over those as well
